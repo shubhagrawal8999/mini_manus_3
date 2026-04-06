@@ -10,6 +10,30 @@ This guide describes a production-style architecture for an AI agent that:
 - Deploys on **Railway free tier**
 - Stays modular for future expansion **بسهولة**
 
+
+## Implementation Status (What is now in this repo)
+
+This repository now includes a working starter scaffold with:
+
+- Provider abstraction and router for OpenAI + DeepSeek (`src/agent/providers`, `src/agent/core/router.py`)
+- Persistent memory store using SQLite with vector-like retrieval (`src/agent/memory/store.py`)
+- Orchestrator with automated posting workflow + feedback learning (`src/agent/core/orchestrator.py`)
+- Validation pipeline for payload and generated Python code checks (`src/agent/validation/pipeline.py`)
+- Deployment starter files for Railway (`Dockerfile`, `railway.toml`, `.env.example`)
+- Unit tests for routing, memory retrieval, posting flow, and failure learning (`tests/`)
+
+### Quick run
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e .
+python -m agent.app
+python -m pytest -q
+```
+
+---
+
 ---
 
 ## 1) Product Goals and Non-Goals
