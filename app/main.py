@@ -1,8 +1,10 @@
-FROM python:3.11
+# /app/main.py
+from fastapi import FastAPI
+from agent.controller import AgentController
 
-WORKDIR /app
-COPY . .
+app = FastAPI()
+agent = AgentController()
 
-RUN pip install -r requirements.txt
-
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+@app.post("/event")
+async def handle_event(event: dict):
+    return await agent.process(event)
